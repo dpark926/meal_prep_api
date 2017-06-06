@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  day: MyString
+  breakfast_meal_id: 1
+  lunch_meal_id: 1
+  dinner_meal_id: 1
+
+two:
+  day: MyString
+  breakfast_meal_id: 1
+  lunch_meal_id: 1
+  dinner_meal_id: 1
