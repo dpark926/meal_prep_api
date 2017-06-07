@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class Api::V1::RecipesController < ApplicationController
   def index
     recipes = Recipe.all
     render json: recipes
@@ -11,6 +11,6 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:name, :ingredients, :instruction, :category, :calories, :created_by_id)
+    params.require(:recipe).permit(:name, :ingredients, :instructions, :calories, :author_id)
   end
 end
