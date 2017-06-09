@@ -10,13 +10,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    student = Student.find(params[:id])
+    student = User.find(params[:id])
     student.destroy
     render json: student
   end
 
   private
   def user_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :email)
   end
 end
