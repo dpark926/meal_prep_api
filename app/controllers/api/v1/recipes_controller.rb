@@ -1,7 +1,8 @@
 class Api::V1::RecipesController < ApplicationController
   def index
     recipes = Recipe.all
-    render json: recipes
+    render json: recipes.to_json(include: [ingredients: {only: [:id, :name, :food_type]}])
+    # render json: recipes.to_json(include: :ingredients)
   end
 
   def create
