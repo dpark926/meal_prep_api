@@ -5,8 +5,25 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    render json: user
+    user = User.new(user_params)
+    if user.save
+      token = JWT.encode({user_id: user.id}, ENV["JWT_SECRET"], ENV["JWT_ALGORITHM"])
+      render json: {user: user.name, token: token}
+    else
+      render json: {error: "ERROR"}, status: 400
+    end
+  end
+
+  def user_signin
+    user = User.find_by(name: params[:name])
+    if (user.present? && user.authenticate(params[:password]))
+      token = JWT.encode(
+        {user_id: user.id}, ENV["JWT_SECRET"], ENV["JWT_ALGORITHM"]
+      )
+      render json: {user: user, token: token}
+    else
+      render json: {error: "error"}
+    end
   end
 
   def destroy
@@ -17,6 +34,6 @@ class Api::V1::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password)
   end
 end

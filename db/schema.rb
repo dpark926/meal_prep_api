@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607190744) do
+ActiveRecord::Schema.define(version: 20170614150241) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "category"
@@ -34,6 +34,13 @@ ActiveRecord::Schema.define(version: 20170607190744) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "planner_dates", force: :cascade do |t|
+    t.string  "date"
+    t.integer "user_id"
+    t.integer "recipe_id"
+    t.string  "meal_type"
+  end
+
   create_table "recipe_categories", force: :cascade do |t|
     t.integer  "recipe_id"
     t.integer  "category_id"
@@ -44,8 +51,10 @@ ActiveRecord::Schema.define(version: 20170607190744) do
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer  "recipe_id"
     t.integer  "ingredient_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "quantity_amount"
+    t.string   "quantity_type"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -67,8 +76,9 @@ ActiveRecord::Schema.define(version: 20170607190744) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
   end
 
   create_table "weeks", force: :cascade do |t|
