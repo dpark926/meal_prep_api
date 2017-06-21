@@ -4,6 +4,11 @@ class Api::V1::PlannerDatesController < ApplicationController
     render json: planner_dates
   end
 
+  def show
+    planner_date = PlannerDate.find(params[:id])
+    render json: planner_date
+  end
+
   def create
     planner_date = PlannerDate.create(planner_date_params)
     render json: planner_date
@@ -25,6 +30,6 @@ class Api::V1::PlannerDatesController < ApplicationController
 
   private
   def planner_date_params
-    params.require(:planner_date).permit(:date, :user_id, :recipe_id, :meal_type)
+    params.require(:planner_date).permit(:date, :user_id, :recipe_id, :recipe_name, :meal_type)
   end
 end
